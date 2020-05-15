@@ -1,13 +1,25 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Pizza from '../Assets/Pizza.jpg';
+import styled from 'styled-components';
+import '../App.css'
+
+const HomeDiv = styled.div`
+    display: flex;
+    flex-direction: column;
+`
+
+const HomeImage = styled.img`
+    height: 40vh;
+    width: 40%;
+`
 
 const HomePage = () => {
     return(
-        <div>
-            <Link to='/pizza'>Build your own Pizza</Link>
-            <img src={Pizza} alt='Pizza' />
-        </div>
+        <HomeDiv>
+            <Link to='/pizza' className='Links'>Build your own Pizza</Link>
+            <HomeImage src={Pizza} alt='Pizza' />
+        </HomeDiv>
     )
 }
 
