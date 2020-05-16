@@ -7,6 +7,21 @@
   pointer-events: none;
 }
 
+.Links {
+  color: black;
+  text-decoration: none;
+  border: 1px solid black;
+  padding: 2%;
+  border-radius: 5%;
+  width: 35%;
+  text-align: center;
+}
+
+.errors {
+  color: red;
+  font-size: 85%;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
