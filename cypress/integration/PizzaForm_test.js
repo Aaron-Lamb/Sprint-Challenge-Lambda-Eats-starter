@@ -1,0 +1,17 @@
+describe('Testing the pizza form', () => {
+    it('Tests all form inputs', () => {
+        cy.visit('http://localhost:3000')
+        cy.get('.Links').click()
+        cy.get('#name').type('B')
+        cy.get('form > :nth-child(1)').contains('Must input a name more than two characters')
+        cy.get('#name').clear().type('Bill E. Bob').should('have.value', 'Bill E. Bob')
+        cy.get('select').select('16 inch').should('have.value', '16 inch')
+        cy.get('#pepperoni').should('not.be.checked')
+        cy.get('#bacon').check().should('be.checked')
+        cy.get('#peppers').check().should('be.checked')
+        cy.get('#sausage').should('not.be.checked')
+        cy.get('#special').type('Extra cheese and garlic').should('have.value', 'Extra cheese and garlic')
+        cy.get('form').submit()
+        cy.get(':nth-child(3) > div').contains('Bill E. Bob')
+    })
+})

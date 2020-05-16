@@ -3,7 +3,13 @@ import * as yup from 'yup';
 import '../App.css';
 
 const pizzaSchema = yup.object().shape({
-    name: yup.string().min(2, 'Must input a name more than two characters').required('Please input a name')
+    name: yup.string().min(2, 'Must input a name more than two characters').required('Please input a name'),
+    size: yup.string(),
+    pepperoni: yup.boolean(),
+    bacon: yup.boolean(),
+    peppers: yup.boolean(),
+    sausage: yup.boolean(),
+    special: yup.string()
 })
 
 const PizzaForm = () => {
