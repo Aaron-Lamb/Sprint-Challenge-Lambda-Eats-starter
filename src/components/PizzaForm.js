@@ -1,6 +1,12 @@
 import React, { useState } from 'react';
 import * as yup from 'yup';
 import '../App.css';
+import styled from 'styled-components';
+
+const StyledForm = styled.form`
+    display: flex;
+    flex-direction: column;
+`
 
 const pizzaSchema = yup.object().shape({
     name: yup.string().min(2, 'Must input a name more than two characters').required('Please input a name'),
@@ -84,7 +90,7 @@ const orderSubmit = event => {
 
     return(
         <div>
-            <form onSubmit={orderSubmit}>
+            <StyledForm onSubmit={orderSubmit}>
                 <label>
                     Your Name Here: 
                     <input onChange={pizzaChange} value={pizzaState.name} type='text' name='name' id='name' />
@@ -127,7 +133,7 @@ const orderSubmit = event => {
                     <input onChange={pizzaChange} value={pizzaState.special} type='text' name='special' id='special' />
                 </label>
                 <button type='submit'>Add to Order</button>
-            </form>
+            </StyledForm>
             {order.map(pizza => {
                 return <div>
                      <h5>{pizza.name}</h5>

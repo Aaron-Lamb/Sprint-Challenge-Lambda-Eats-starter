@@ -7,7 +7,9 @@ import '../App.css'
 const HomeDiv = styled.div`
     display: flex;
     flex-direction: column;
-`
+    margin-left: 50%;
+    width: 100%;
+    `
 
 const HomeImage = styled.img`
     height: 40vh;
