@@ -1,8 +1,24 @@
 import React, { useState } from 'react';
+import * as yup from 'yup';
+import '../App.css';
+
+const pizzaSchema = yup.object().shape({
+    name: yup.string().min(2, 'Must input a name more than two characters').required('Please input a name')
+})
 
 const PizzaForm = () => {
 
 const [order, setOrder] = useState([])
+
+const [orderError, setOrderError] = useState({
+    name: '',
+    size: '',
+    pepperoni: '',
+    bacon: '',
+    peppers: '',
+    sausage: '',
+    special: ''
+})
 
 const [pizzaState, setPizzaState] = useState({
     name: '',
@@ -14,7 +30,27 @@ const [pizzaState, setPizzaState] = useState({
     special: ''
 })
 
+const validateOrder = (event) => {
+    let value = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
+    yup.reach(pizzaSchema, event.target.name)
+    .validate(value)
+    .then(valid => {
+        setOrderError({
+            ...orderError,
+            [event.target.name]: ''
+        });
+    })
+    .catch(err => {
+        setOrderError({
+            ...orderError,
+            [event.target.name]: err.errors[0]
+        })
+    })
+}
+
 const pizzaChange = (event) => {
+    event.persist();
+    validateOrder(event)
     let value = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
     setPizzaState({
         ...pizzaState,
@@ -46,6 +82,10 @@ const orderSubmit = event => {
                 <label>
                     Your Name Here: 
                     <input onChange={pizzaChange} value={pizzaState.name} type='text' name='name' id='name' />
+                    {orderError.name.length > 0 ? (
+                        <p className='errors'>{orderError.name}</p>
+                    ) : null
+                }
                 </label>
                 <label>
                     Pizza Size: 
